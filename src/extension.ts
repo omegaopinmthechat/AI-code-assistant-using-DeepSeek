@@ -31,8 +31,8 @@ export function activate(context: vscode.ExtensionContext) {
                 } catch (error: any) {
                     console.error('Error in ollama.chat:', error);
                     panel.webview.postMessage({
-                        command: 'chatresponse',
-                        text: `Error: ${String (error.message) || error}`
+                        command: 'chatResponse',
+                        text: `Error: ${String(error.message) || error}`
                     });
                 }
             }
@@ -49,8 +49,64 @@ function getWebviewContent(): string {
     <head>
         <meta charset="UTF-8"/>
         <style>
-            body { font-family: sans-serif; margin: 1rem; }
-            #prompt { width: 100%; box-sizing: border-box; border: 1px solid #ccc; margin-top: 1rem; padding: 0.5rem; }
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background: linear-gradient(135deg, #e0f7fa, #007acc);
+                color: #333;
+            }
+            h1 {
+                color: #fff;
+                background: linear-gradient(135deg, #007acc, #005f99);
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            }
+            #prompt {
+                width: 80%;
+                max-width: 600px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 0.5rem;
+                margin-top: 1rem;
+                font-size: 1rem;
+                color: #111;
+                background: #f4f4f9;
+            }
+            #askBtn {
+                margin-top: 1rem;
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                color: #fff;
+                background: linear-gradient(135deg, #007acc, #005f99);
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+            #askBtn:hover {
+                background: linear-gradient(135deg, #005f99, #004f7a);
+                transform: translateY(-2px);
+            }
+            #response {
+                margin-top: 1rem;
+                width: 80%;
+                max-width: 600px;
+                padding: 1rem;
+                background: #ffffffdd;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                overflow-y: auto;
+                max-height: 300px;
+                color: #111;
+            }
         </style>
     </head>
     <body>
@@ -79,5 +135,3 @@ function getWebviewContent(): string {
 }
 
 export function deactivate() {}
-
-
